@@ -35,11 +35,12 @@ jobs:
       uses: docker/setup-buildx-action@v1
       
     - name: BuildPack
-      run: |
-        docker info  # this is just to check that Docker is running
-        command build
-      env:
-        DOCKER_HOST: tcp://docker-in-dind:2375
+     # uses: docker:stable-dind
+      run: docker run --rm -v $(pwd):/app docker:stable-dind command build
+       # docker info  # this is just to check that Docker is running
+       # command build
+      # env:
+      #   DOCKER_HOST: tcp://docker-in-dind:2375
 
     # Build and push Docker image
     - name: Build Dockerfile
