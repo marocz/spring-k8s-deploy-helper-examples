@@ -8,13 +8,12 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    services:
-      k8s-deploy-helper:
-        image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
-        options: --privileged
-      docker-in-dind:
-        image: docker:stable-dind
-        options: --privileged
+    container:
+      image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
+      #   options: --privileged
+      # docker-in-dind:
+      #   image: docker:stable-dind
+      #   options: --privileged
 
     steps:
     # Checkout the code
@@ -36,7 +35,7 @@ jobs:
       
     - name: BuildPack
      # uses: docker:stable-dind
-      run: docker run --rm -v $(pwd):/app docker:stable-dind command build
+      run: command build
        # docker info  # this is just to check that Docker is running
        # command build
       # env:
