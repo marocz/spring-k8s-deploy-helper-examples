@@ -12,7 +12,7 @@ jobs:
       k8s-deploy-helper:
         image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
         options: --privileged
-      docker:
+      docker-in-dind:
         image: docker:stable-dind
         options: --privileged
 
@@ -39,7 +39,7 @@ jobs:
         docker info  # this is just to check that Docker is running
         command build
       env:
-        DOCKER_HOST: tcp://docker:2375
+        DOCKER_HOST: tcp://docker-in-dind:2375
 
     # Build and push Docker image
     - name: Build Dockerfile
