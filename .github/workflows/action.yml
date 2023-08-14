@@ -39,9 +39,9 @@ jobs:
     # container:
     #    image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
     steps:
-      - uses: actions/checkout@v2
+ 
       - run: |
-          echo "Runs inside a container"   
+          ls -l $(pwd)
       - name: BuildPack
         run: command build
 
