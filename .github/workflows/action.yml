@@ -36,7 +36,8 @@ jobs:
       run: |
         ls -l
         pwd
-        docker run --rm -v $(pwd):/app quay.io/lifechurch/k8s-deploy-helper:3.0.0 build /app
+        docker run --rm -v $(pwd):/app -it quay.io/lifechurch/k8s-deploy-helper:3.0.0 ls -l /app
+     #   docker run --rm -v $(pwd):/app quay.io/lifechurch/k8s-deploy-helper:3.0.0 build
       
   container1:
     runs-on: ubuntu-latest
