@@ -8,8 +8,6 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    container:
-       image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
       #   options: --privileged
       # docker-in-dind:
       #   image: docker:stable-dind
@@ -33,28 +31,30 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
       
-    - name: BuildPack
-     # uses: docker:stable-dind
-      run: command build
-       # docker info  # this is just to check that Docker is running
-       # command build
-      # env:
-      #   DOCKER_HOST: tcp://docker-in-dind:2375
+  container1:
+    runs-on: ubuntu-latest
+    container: quay.io/lifechurch/k8s-deploy-helper:3.0.0
+    # container:
+    #    image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo "Runs inside a container"   
+      - name: BuildPack
+        run: command build
 
-    # Build and push Docker image
-    - name: Build Dockerfile
-      run: |
-        # Your commands to interact with k8s-deploy-helper here
-        command build
-      env:
-        DOCKER_HOST: tcp://k8s-deploy-helper:2375
+    # # Build and push Docker image
+    # - name: Build Dockerfile
+    #   run: |
+    #     # Your commands to interact with k8s-deploy-helper here
+    #     command build
+    #   env:
+    #     DOCKER_HOST: tcp://k8s-deploy-helper:2375
 
-    - name: Push Docker
-      run: |
-        # Your commands to interact with k8s-deploy-helper here
-        command push
-      env:
-        DOCKER_HOST: tcp://k8s-deploy-helper:2375
+      - name: Push Docker
+        run: |
+          # Your commands to interact with k8s-deploy-helper here
+          command push
 
     # Deploy to Kubernetes
     # - name: Deploy to Kubernetes
