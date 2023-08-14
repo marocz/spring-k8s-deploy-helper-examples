@@ -8,8 +8,8 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    container:
-      image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
+    # container:
+    #   image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
       #   options: --privileged
       # docker-in-dind:
       #   image: docker:stable-dind
