@@ -33,7 +33,10 @@ jobs:
     - name: check base
       run: ls -l
     - name: Build code
-      run: docker run quay.io/lifechurch/k8s-deploy-helper:3.0.0 build
+      run: |
+        ls -l
+        pwd
+        docker run --rm -v $(pwd):/app quay.io/lifechurch/k8s-deploy-helper:3.0.0 build
       
   container1:
     runs-on: ubuntu-latest
