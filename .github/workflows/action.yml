@@ -31,7 +31,7 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
     - name: Build code
-      run: docker run --rm -v $(pwd):/ quay.io/lifechurch/k8s-deploy-helper:3.0.0 build
+      run: docker run --rm -vvvv $(pwd):/app quay.io/lifechurch/k8s-deploy-helper:3.0.0 build
       
   container1:
     runs-on: ubuntu-latest
