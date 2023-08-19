@@ -29,10 +29,15 @@ jobs:
 
     - name: Install Maven
       run: |
-        apk add -U maven zlib
+        apk add -U maven
+    - name: Install zlib
+      run: apk add --no-cache zlib
 
-    - name: Run mvn test
+    - name: Run Maven tests
       run: mvn test
+      env:
+        JAVA_HOME: /__t/Java_Adopt_jdk/17.0.8-7/x64
+
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
