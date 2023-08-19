@@ -27,13 +27,13 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
 
-    - name: Install Maven
-      run: |
-        apk add -U maven openjdk11
-        apk add --no-cache zlib
-        mvn test
-    - name: Install zlib
-      run: apk add --no-cache zlib
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'maven'
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
 
     - name: Run Maven tests
       run: mvn test
