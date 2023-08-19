@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  App Tests:
+  App_Tests:
     runs-on: ubuntu-latest
       #   options: --privileged
       # docker-in-dind:
