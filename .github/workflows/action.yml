@@ -6,10 +6,8 @@ on:
       - main
 
 jobs:
-  build_and_deploy:
+  App Tests:
     runs-on: ubuntu-latest
-    container:
-      image: blaromack/k8s-deploy-helper-github:1.0.0
       #   options: --privileged
       # docker-in-dind:
       #   image: docker:stable-dind
@@ -27,12 +25,25 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
 
-    - uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-        cache: 'maven'
-    - run: mvn -B package --file pom.xml
+    - name: Maven Build
+      run: mvn install
+
+    - name: Unit Test
+      run: mvn test
+
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: blaromack/k8s-deploy-helper-github:1.0.0
+      #   options: --privileged
+      # docker-in-dind:
+      #   image: docker:stable-dind
+      #   options: --privileged
+
+    steps:
+    # Checkout the code
+    - name: Checkout
+      uses: actions/checkout@v2
 
     - name: Run Maven tests
       run: mvn test
