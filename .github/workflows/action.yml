@@ -8,6 +8,8 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    container:
+      image: blaromack/k8s-deploy-helper-github:1.0.0
       #   options: --privileged
       # docker-in-dind:
       #   image: docker:stable-dind
@@ -34,40 +36,5 @@ jobs:
       run: ls -l
     - name: Build code
       run: |
-        ls -l
-        pwd
-        docker run --rm -v $(pwd):/app quay.io/lifechurch/k8s-deploy-helper:3.0.0 build .
-      
-  container1:
-    runs-on: ubuntu-latest
-    container: quay.io/lifechurch/k8s-deploy-helper:3.0.0
-    # container:
-    #    image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
-    steps:
- 
-      - run: |
-          ls -l $(pwd)
-      - name: BuildPack
-        run: command build
-
-    # # Build and push Docker image
-    # - name: Build Dockerfile
-    #   run: |
-    #     # Your commands to interact with k8s-deploy-helper here
-    #     command build
-    #   env:
-    #     DOCKER_HOST: tcp://k8s-deploy-helper:2375
-
-      - name: Push Docker
-        run: |
-          # Your commands to interact with k8s-deploy-helper here
-          command push
-
-    # Deploy to Kubernetes
-    # - name: Deploy to Kubernetes
-    #   run: |
-    #     echo "${{ secrets.KUBECONFIG }}" > kubeconfig.yml
-    #     kubectl apply -f your-k8s-manifest.yml  # Replace with the path to your Kubernetes manifest
-    #   env:
-    #     KUBECONFIG: kubeconfig.yml
-
+        command build
+       
