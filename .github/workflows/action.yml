@@ -29,8 +29,7 @@ jobs:
 
     - name: Install Maven
       run: |
-        apt-get update
-        apt-get install -y maven
+        apk add -U maven
 
     - name: Run mvn test
       run: mvn test
