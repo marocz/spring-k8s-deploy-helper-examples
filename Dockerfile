@@ -4,9 +4,6 @@ FROM openjdk:17-jdk-slim
 # Arguments to set up jar file path and other variables if needed
 ARG JAR_FILE=target/*.jar
 
-FROM base as build
-COPY /* /app/
-WORKDIR /app
 
 # Environment variable for Eureka service URL, can be overridden at runtime
 ENV EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
