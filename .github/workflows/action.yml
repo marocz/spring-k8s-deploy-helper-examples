@@ -29,6 +29,50 @@ jobs:
 
     - name: Maven Build
       run: mvn clean install
+    
+To run mvn test in a GitHub Actions workflow for a Maven-based Java project, follow the steps below:
+
+1. Create a New Workflow File
+In your repository, create a new workflow file. For example:
+
+bash
+Copy code
+.github/workflows/maven-test.yml
+2. Define the Workflow
+Here's a basic example that checks out your code and runs mvn test whenever there's a push to the main branch:
+
+yaml
+Copy code
+name: Maven Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '17'
+
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: Run mvn test
+      run: mvn test
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
