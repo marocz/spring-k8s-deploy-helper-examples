@@ -30,7 +30,7 @@ jobs:
     - name: Install Maven
       run: |
         apk add -U maven
-        apk add --no-cache zlib-dev
+        apk add --no-cache zlib-dev zlib
         mvn test
     - name: Install zlib
       run: apk add --no-cache zlib
