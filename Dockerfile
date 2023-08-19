@@ -14,15 +14,6 @@ ENV EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
 RUN mvn install
 
 #calling base like this shrinks the size of the dockerfile
-FROM base as release
-
-RUN mkdir /app
-WORKDIR /app
-
-COPY --from=build /app/target/ /app/
-
-# Copy the compiled JAR file from the target directory into the image
-COPY ${JAR_FILE} app.jar
 
 RUN mv /app/spring-boot-microservice-eureka-naming-server-0.0.1-SNAPSHOT.jar /app/app.jar
 
