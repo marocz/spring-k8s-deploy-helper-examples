@@ -32,6 +32,7 @@ jobs:
       run: mvn test
 
   build_and_deploy:
+    needs: App_Tests
     runs-on: ubuntu-latest
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
