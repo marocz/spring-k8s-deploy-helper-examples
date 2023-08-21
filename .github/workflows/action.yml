@@ -37,7 +37,7 @@ jobs:
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
     container:
-      image: blaromack/k8s-deploy-helper-github:1.0.0
+      image: marocz/k8s-deploy-helper-github:1.0.0
       #   options: --privileged
       # docker-in-dind:
       #   image: docker:stable-dind
