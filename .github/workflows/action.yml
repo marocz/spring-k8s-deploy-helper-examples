@@ -79,7 +79,6 @@ jobs:
 
     - name: Deploy
       run: |
-        env
         command deploy
 
 
