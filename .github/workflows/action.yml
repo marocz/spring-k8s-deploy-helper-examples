@@ -53,6 +53,7 @@ jobs:
       CI_ENVIRONMENT_URL: 'http://spiringboot.marocz.com'
       CI_DEPLOY_USER: ${{ secrets.DOCKER_HUB_USERNAME }}
       CI_DEPLOY_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      CLUSTER: ${{ secrets.CLUSTER }}
 
     container:
       image: marocz/k8s-deploy-helper-github:1.0.0
