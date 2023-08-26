@@ -40,7 +40,7 @@ jobs:
     - name: Unit Test
       run: mvn test
 
-  build_and_deploy:
+  deploy:
     needs: App_Tests
     runs-on: ubuntu-latest
     env:
@@ -75,7 +75,7 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-    - name: Build code
+    - name: Build
       run: |
         command build
 
