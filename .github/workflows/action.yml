@@ -50,6 +50,9 @@ jobs:
       KUBE_CA_PEM: ${{ secrets.KUBE_CA_PEM }}
       KUBE_NAMESPACE: '${{ github.event.inputs.namespace }}'
       CI_ENVIRONMENT_SLUG: '${{ github.event.inputs.env_slug }}'
+      CI_ENVIRONMENT_URL: 'http://spiringboot.marocz.com'
+      CI_DEPLOY_USER: ${{ secrets.DOCKER_HUB_USERNAME }}
+      CI_DEPLOY_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
     container:
       image: marocz/k8s-deploy-helper-github:1.0.0
