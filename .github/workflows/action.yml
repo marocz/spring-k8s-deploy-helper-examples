@@ -24,6 +24,11 @@ on:
         required: true
         default: 'false'
         type: boolean
+      is_canary_destroy:
+        description: 'Canary Deployment'
+        required: true
+        default: 'false'
+        type: boolean
 
 jobs:
   App_Tests:
@@ -349,4 +354,42 @@ jobs:
       run: |
         command destroy
 
-       
+  destroy-canary:
+    needs: App_Tests
+    if: github.ref == 'refs/heads/production' && github.event.inputs.destroy == 'true' &&  && github.event.inputs.is_canary_destroy == 'true'
+    runs-on: ubuntu-latest
+    env:
+      CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
+      KUBE_URL: ${{ secrets.KUBE_URL }}
+      KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
+      KUBE_CA_PEM: ${{ secrets.KUBE_CA_PEM }}
+      KUBE_NAMESPACE: '${{ github.event.inputs.namespace }}'
+      CI_ENVIRONMENT_SLUG: '${{ github.event.inputs.env_slug }}'
+      CI_ENVIRONMENT_URL: 'http://spiringboot.marocz.com'
+      CI_DEPLOY_USER: ${{ secrets.DOCKER_HUB_USERNAME }}
+      CI_DEPLOY_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      CI_REGISTRY: ghcr.io
+      CLUSTER: ${{ secrets.CLUSTER }}
+
+    container:
+      image: marocz/k8s-deploy-helper-github:1.0.0
+      #   options: --privileged
+      # docker-in-dind:
+      #   image: docker:stable-dind
+      #   options: --privileged
+
+    steps:
+    # Checkout the code
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+    - name: Destroy
+      run: |
+        command destroy
