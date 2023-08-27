@@ -190,7 +190,7 @@ jobs:
 
   canary:
     needs: App_Tests
-    if: github.ref == 'refs/heads/production' && github.event.inputs.is_canary == 'true'
+    if: github.event.inputs.is_canary == 'true'  && github.event.inputs.is_canary_destroy == 'false'
     runs-on: ubuntu-latest
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
