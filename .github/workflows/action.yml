@@ -225,7 +225,7 @@ jobs:
 
     - name: Deploy
       run: |
-        command deploy
+        command deploy-flagger
 
 
 
