@@ -48,7 +48,7 @@ jobs:
 
   deploy-develop:
     needs: App_Tests
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.event.inputs.destroy == 'false'
     runs-on: ubuntu-latest
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
@@ -92,7 +92,7 @@ jobs:
 
   deploy-staging:
     needs: App_Tests
-    if: github.ref == 'refs/heads/staging'
+    if: github.ref == 'refs/heads/staging' && github.event.inputs.destroy == 'false'
     runs-on: ubuntu-latest
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
@@ -136,7 +136,7 @@ jobs:
 
   deploy-production:
     needs: App_Tests
-    if: github.ref == 'refs/heads/production'
+    if: github.ref == 'refs/heads/production' && github.event.inputs.destroy == 'false'
     runs-on: ubuntu-latest
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
