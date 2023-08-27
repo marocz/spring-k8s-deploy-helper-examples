@@ -356,7 +356,7 @@ jobs:
 
   destroy-canary:
     needs: App_Tests
-    if: github.ref == 'refs/heads/production' &&  && github.event.inputs.is_canary_destroy == 'true'
+    if: github.ref == 'refs/heads/production'  && github.event.inputs.is_canary_destroy == 'true'
     runs-on: ubuntu-latest
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
