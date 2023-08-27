@@ -29,9 +29,10 @@ WORKDIR /app
 # Build and deploy the application
 RUN mvn clean install
 
+RUN cp target/*.jar ./app.jar
 # Expose the application's port (if needed)
 # EXPOSE 8080
 
 # Set the command to run your application
-ENTRYPOINT ["java", "-Dspring.cloud.config.uri=${EUREKA_SERVER_URL}", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-Dspring.cloud.config.uri=${EUREKA_SERVER_URL}", "-jar", "./app.jar"]
 
