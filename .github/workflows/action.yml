@@ -25,7 +25,7 @@ on:
         default: 'false'
         type: boolean
       is_canary_destroy:
-        description: 'Canary Deployment'
+        description: 'Canary Destroy'
         required: true
         default: 'false'
         type: boolean
