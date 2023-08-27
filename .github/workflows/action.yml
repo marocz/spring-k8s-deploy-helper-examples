@@ -141,7 +141,7 @@ jobs:
 
   deploy-production:
     needs: App_Tests
-    if: github.ref == 'refs/heads/production' && github.event.inputs.destroy == 'false'
+    if: github.ref == 'refs/heads/production' && github.event.inputs.destroy == 'false'  && github.event.inputs.is_canary == 'false'
     runs-on: ubuntu-latest
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
