@@ -58,7 +58,7 @@ jobs:
 
   deploy-develop:
     needs: App_Tests
-    if: github.ref == 'refs/heads/main' && github.event.inputs.destroy == 'false' && github.event.inputs.is_canary_destroy == 'false'
+    if: github.ref == 'refs/heads/main' && github.event.inputs.destroy == 'false' && github.event.inputs.is_canary_destroy == 'false' && github.event.inputs.is_canary == 'false'
     runs-on: ubuntu-latest
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
@@ -102,7 +102,7 @@ jobs:
 
   deploy-staging:
     needs: App_Tests
-    if: github.ref == 'refs/heads/staging' && github.event.inputs.destroy == 'false' && github.event.inputs.is_canary_destroy == 'false'
+    if: github.ref == 'refs/heads/staging' && github.event.inputs.destroy == 'false' && github.event.inputs.is_canary_destroy == 'false' && github.event.inputs.is_canary == 'false'
     runs-on: ubuntu-latest
     env:
       CI_REGISTRY_IMAGE: ghcr.io/marocz/spring-k8s-deploy-helper-examples
